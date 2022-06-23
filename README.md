@@ -41,3 +41,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 在微信里打开网页，自动开始播放音视频方法封装。详见[autoPlay](./src/utils/wx.js)。  
 ### 常用js方法封装
 防抖节流、获取参数数据类型、复制内容到剪贴板、文件切片、函数柯里化、函数式编程实现、时间日期格式化、时区转换、深拷贝、排序、预加载图片等等。详见[common](./src/utils/common.js)。  
+### 本地、会话存储封装
+支持设置过期时间。详见[storage](./src/utils/storage.js)。  
