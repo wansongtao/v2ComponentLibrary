@@ -37,3 +37,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 获取两个数字之间的所有整数，判断是否为素数等方法。详见[number](./src/utils/number.js)。  
 ### 判断平台、系统相关方法
 是否为iOS平台、是否为手机平台等方法。详见[system](./src/utils/system.js)。  
+### 微信自动播放音视频
+在微信里打开网页，自动开始播放音视频方法封装。详见[autoPlay](./src/utils/wx.js)。  
