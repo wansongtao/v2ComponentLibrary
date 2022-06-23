@@ -33,3 +33,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 常用js
 ### 页面元素转图片
 使用html2canvas库将页面元素转换为图片。该方法接收两个参数，一个dom元素，一个配置对象。详见[domToImage](./src/utils/domToImg.js)方法.  
+### 数字相关方法
+获取两个数字之间的所有整数，判断是否为素数等方法。详见[number](./src/utils/number.js)。  
