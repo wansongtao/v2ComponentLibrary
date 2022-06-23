@@ -29,4 +29,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## 常用css
-有移动端的1px方案、超出一行换行、超出多行换行、禁止选中文本、自定义光标颜色、自定义滚动条等，详见[styles/common](./src/styles/common.css).
+有移动端的1px方案、超出一行换行、超出多行换行、禁止选中文本、自定义光标颜色、自定义滚动条等，详见[styles/common](./src/styles/common.css).  
+## 常用js
+### 页面元素转图片
+使用html2canvas库将页面元素转换为图片。该方法接收两个参数，一个dom元素，一个配置对象。详见[domToImage](./src/utils/domToImg.js)方法.  
