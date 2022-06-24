@@ -114,9 +114,11 @@ export default {
     };
 
     const deleteFile = (idx) => {
-      if (typeof idx !== 'number') {
+      if (typeof idx !== 'number' || idx >= files.value.length || idx < 0) {
         return;
       }
+
+      idx = idx | 0
       files.value.splice(idx, 0);
       if (disabled.value) {
         disabled.value = false;
