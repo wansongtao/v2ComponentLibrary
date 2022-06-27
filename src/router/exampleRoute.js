@@ -14,6 +14,14 @@ const exampleRoutes = [
     meta: {
       title: '文件选择器'
     }
+  },
+  {
+    path: 'paginationexample',
+    name: 'paginationExample',
+    component: () => import('@/views/paginationExam/index.vue'),
+    meta: {
+      title: '分页器示例'
+    }
   }
 ];
 
