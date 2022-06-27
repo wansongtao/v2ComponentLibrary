@@ -46,3 +46,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 自定义组件
 ### 文件选择器
 支持单、多选文件，支持拖动选择，支持限制文件类型和数量，使用input元素实现。详见[fileSelector](./src/components/FileSelector/index.vue)。  
+## 封装element-ui组件
+### 分页器
+样式修改封装，支持传入总数、页码、每页大小。详见[MultPagination](./src/components/MultPagination/index.vue)。  
