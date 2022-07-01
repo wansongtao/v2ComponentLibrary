@@ -1,28 +1,41 @@
 /**
+ * 默认前缀
+ */
+const PREFIX = 'v3-';
+
+/**
  * 本地/会话存储，支持设置过期时间
  * @param {object} config
- * @param {string} [config.type='local'] 默认本地存储，session/local
- * @param {string} config.key
- * @param {any} config.value
+ * @param {boolean} [config.isLocalStorage] 是否本地存储
+ * @param {string} config.key 名称
+ * @param {any} config.value 值
  * @param {number} [config.maxAge] 多少秒后过期
+ * @param {string} [config.prefix] 名称前缀
  * @returns
  */
-export const setStorage = (config) => {
-  const storage = { data: config.value, expire: 0 };
+export const setStorage = ({
+  isLocalStorage = true,
+  key,
+  value,
+  maxAge,
+  prefix = PREFIX
+}) => {
+  const storage = { data: value, expire: 0 };
 
-  if (config.maxAge) {
-    storage.expire = Date.now() + config.maxAge * 1000;
+  if (typeof maxAge === 'number') {
+    storage.expire = Date.now() + maxAge * 1000;
   }
 
   try {
-    const value = JSON.stringify(storage);
+    const data = JSON.stringify(storage);
+    const name = `${prefix}${key}`;
 
-    if (config.type === 'session') {
-      sessionStorage.setItem(config.key, value);
+    if (isLocalStorage) {
+      localStorage.setItem(name, data);
       return;
     }
 
-    localStorage.setItem(config.key, value);
+    sessionStorage.setItem(name, data);
   } catch (ex) {
     console.error(ex);
   }
@@ -31,26 +44,26 @@ export const setStorage = (config) => {
 /**
  * 取出本地/会话存储中未过期的数据，已过期、未找到返回null
  * @param {string} key
- * @param {string} type 默认本地存储
+ * @param {boolean} [isLocalStorage] 是否本地存储
+ * @param {string} [prefix]
  * @returns
  */
-export const getStorage = (key, type) => {
-  let storage = '';
-  if (type === 'session') {
-    storage = sessionStorage.getItem(key);
-  } else {
-    storage = localStorage.getItem(key);
-  }
+export const getStorage = (key, isLocalStorage = true, prefix = PREFIX) => {
+  const name = `${prefix}${key}`;
+  const storage = isLocalStorage
+    ? localStorage.getItem(name)
+    : sessionStorage.getItem(name);
 
-  if (!storage) {
-    console.error(`not found ${key}`);
+  if (storage === null) {
+    console.error(`not found ${name}`);
     return null;
   }
 
-  const data = JSON.parse(storage);
-  if (data.expire && data.expire <= Date.now()) {
+  const value = JSON.parse(storage);
+  if (value.expire && value.expire <= Date.now()) {
+    console.error(`${name}: data expired!`);
     return null;
   }
 
-  return data.data;
+  return value.data;
 };
