@@ -287,9 +287,9 @@ export const curry = (fn, ...args) => {
 };
 
 /**
- * @description 函数式编程实现
- * @param  {...any} funcs
- * @returns
+ * @description 函数式编程实现，从左往右依次执行每个函数
+ * @param  {Function[]} funcs
+ * @returns {Function}
  */
 export const compose = (...funcs) => {
   if (funcs.length === 0) {
@@ -301,10 +301,14 @@ export const compose = (...funcs) => {
     return funcs;
   }
 
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
   return funcs.reduce(
     (a, b) =>
       (...args) =>
-        a(b(...args))
+        b(a(...args))
   );
 };
 
