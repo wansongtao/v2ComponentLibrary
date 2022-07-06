@@ -464,8 +464,8 @@ export const shellSort = (arr, fn) => {
       while (
         prevIdx >= 0 &&
         (fn instanceof Function
-          ? fn(currVal, arr[prevIdx])
-          : arr[prevIdx] > currVal)
+          ? Boolean(fn(currVal, arr[prevIdx]))
+          : String(arr[prevIdx]) > String(currVal))
       ) {
         arr[prevIdx + h] = arr[prevIdx];
         prevIdx -= h;
