@@ -690,9 +690,9 @@ export const deepClone = (obj) => {
 
     for (const key in data) {
       // 跳过原型上的属性
-      if (!data.hasOwnProperty(key)) {
-        continue;
-      }
+      // if (!data.hasOwnProperty(key)) {
+      //   continue;
+      // }
 
       // 简单数据类型直接返回值
       if (!(data[key] instanceof Object)) {
@@ -711,7 +711,9 @@ export const deepClone = (obj) => {
       }
 
       if (data[key] instanceof Function) {
-        newObj[key] = new Function(`return ${data[key].toString()}`)();
+        // 处理es6简写方法名的问题，例如：{hi() {return 1;}}
+        const funcStr = data[key].toString().replace(/^function/, '');
+        newObj[key] = new Function(`return function ${funcStr}`)();
         continue;
       }
 
