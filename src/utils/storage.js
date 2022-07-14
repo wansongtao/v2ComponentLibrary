@@ -44,7 +44,7 @@ export const setStorage = ({
 /**
  * 取出本地/会话存储中未过期的数据，已过期、未找到返回null
  * @param {string} key
- * @param {boolean} [isLocalStorage] 是否本地存储
+ * @param {boolean} [isLocalStorage=true] 是否本地存储
  * @param {string} [prefix]
  * @returns
  */
@@ -66,4 +66,21 @@ export const getStorage = (key, isLocalStorage = true, prefix = PREFIX) => {
   }
 
   return value.data;
+};
+
+/**
+ * 取出本地/会话存储中未过期的数据，已过期、未找到返回null
+ * @param {string} key
+ * @param {boolean} [isLocalStorage=true] 是否本地存储
+ * @param {string} [prefix]
+ * @returns
+ */
+export const removeStorage = (key, isLocalStorage = true, prefix = PREFIX) => {
+  const name = `${prefix}${key}`;
+
+  if (isLocalStorage) {
+    localStorage.removeItem(name);
+  } else {
+    sessionStorage.removeItem(name);
+  }
 };
